@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+         <content-type
+				base-type="org.eclipse.core.runtime.text"
+				file-extensions="mydsl"
+				id="mydsl.contenttype"
+				name="MyDsl File"
+				priority="normal">
+			</content-type>
+   </extension>
+   <extension
+         point="org.eclipse.tm4e.registry.grammars">
+         <grammar
+               path="syntaxes/mydsl.tmLanguage.json"
+               scopeName="text.mydsl">
+         </grammar>
+         <scopeNameContentTypeBinding
+         		contentTypeId="mydsl.contenttype"
+               scopeName="text.mydsl">
+         </scopeNameContentTypeBinding>
+   </extension>
+   
+   <extension
+         point="org.eclipse.lsp4e.languageServer">
+         <server
+         	
+            id="org.eclipse.lsp4e.languages.mydsl"
+            class="mydsl.lsp4e.MyDslLanguageServer"
+            label="MyDsl (Xtext) Language Server">
+      </server>
+      <contentTypeMapping
+            id="org.eclipse.lsp4e.languages.mydsl"
+            contentType="mydsl.contenttype">
+		</contentTypeMapping>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors">
+      <editorContentTypeBinding
+            contentTypeId="mydsl.contenttype"
+            editorId="org.eclipse.ui.genericeditor.GenericEditor">
+      </editorContentTypeBinding>
+</extension>
+
+</plugin>
